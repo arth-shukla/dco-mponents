@@ -1,5 +1,6 @@
 import React from 'react'
-import type { Meta, StoryFn, StoryObj } from '@storybook/react'
+import { render } from '@testing-library/react'
+
 import ThumbnailList from './ThumbnailList'
 import type { DCoThumbnail } from './ThumbnailList'
 
@@ -54,31 +55,8 @@ const testImages: DCoThumbnail[] = [
 	},
 ]
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-const meta = {
-	title: 'DComponents/Function/ThumbnailList',
-	component: ThumbnailList,
-	tags: ['autodocs'],
-} satisfies Meta<typeof ThumbnailList>
-
-export default meta
-
-type Story = StoryObj<typeof ThumbnailList>
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: StoryFn = args => (
-	<ThumbnailList
-		thumbnails={testImages}
-		thumbnailsPerRow={4}
-		imagePadding={10}
-		{...args}
-	/>
-)
-
-export const ForceSquare: Story = Template.bind({})
-// // More on args: https://storybook.js.org/docs/react/writing-stories/args
-ForceSquare.args = { forceSquare: true }
-
-export const NoForceSquare: Story = Template.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-NoForceSquare.args = { forceSquare: false }
+describe('ThumbnailList', () => {
+	test('renders the ThumbnailList component', () => {
+		render(<ThumbnailList thumbnails={testImages} />)
+	})
+})
